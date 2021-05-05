@@ -1,7 +1,7 @@
 - `kind create cluster --name dc1`
 - `helm repo add hashicorp https://helm.releases.hashicorp.com`
 - `helm repo update`
-- `helm install -f config.yaml consul hashicorp/consul --version "0.31.1"`
+- `helm install -f consul-config.yaml consul hashicorp/consul --version "0.31.1"`
 - `helm list --all --all-namespaces` - list all installation
 - `helm delete consul` - to delete using name "consul"
 
@@ -37,6 +37,15 @@ replicaset.apps/consul-webhook-cert-manager-9d6dbf8f5                   1       
 NAME                             READY   AGE
 statefulset.apps/consul-server   1/1     11m
 ```
+
+- deploy vault server
+- `kubectl create ns demo`
+- `kubectl apply -f config-consul.yaml`
+
+
+- `vault-keys` secrets will persist in consul bakend, need to delete it manually from the consul UI.
+- `kubectl port-forward -n default svc/consul-server 8500` - port forward for the consul UI & go to `localhost:8500`
+
 
 Resources: 
 - https://learn.hashicorp.com/tutorials/consul/kubernetes-kind
